@@ -7,7 +7,7 @@ import Footer from './components/FooterSection';
 
 function App() {
   return (
-    <div className="h-screen w-full overflow-auto no-scrollbar">
+    <div className="h-screen w-full overflow-auto no-scrollbar" style={{ willChange: 'scroll-position' }}>
       <NavBar />
       <MainSection />
       <SkillsSection />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import AnimateOnScroll from './AnimationOnScroll';
 import Image1 from '../assets/designs/image-1.png';
@@ -20,6 +20,7 @@ const Card = ({ Image }) => (
       src={Image} 
       alt="Design"
       className="md:w-full object-contain rounded-xl shadow-xl"
+      loading="lazy"
     />
   </div>
 );
@@ -32,59 +33,57 @@ const Carousel = ({ children }) => {
   const [currentX, setCurrentX] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false); 
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = useCallback((e) => {
     setIsDragging(true);
     setStartX(e.clientX);
     setCurrentX(e.clientX);
-  };
+  }, []);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = useCallback((e) => {
     if (!isDragging) return;
     setCurrentX(e.clientX);
-  };
+  }, [isDragging]);
 
-  const handleMouseUp = () => {
+  const handleMouseUp = useCallback(() => {
     if (!isDragging) return;
     
     const deltaX = currentX - startX;
-    const threshold = 50; // Minimum drag distance to trigger navigation
+    const threshold = 50;
     
     if (deltaX > threshold && active > 0) {
-      setActive(i => i - 1); // Drag right = go to previous card
+      setActive(i => i - 1);
     } else if (deltaX < -threshold && active < count - 1) {
-      setActive(i => i + 1); // Drag left = go to next card
+      setActive(i => i + 1);
     }
     
     setIsDragging(false);
     setStartX(0);
     setCurrentX(0);
-  };
+  }, [isDragging, currentX, startX, active, count]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (isDragging) {
       handleMouseUp();
     }
-  };
+  }, [isDragging, handleMouseUp]);
 
-  const handleWheel = (e) => {
-    e.preventDefault(); // Prevent page scrolling
+  const handleWheel = useCallback((e) => {
+    e.preventDefault();
     
-    if (isScrolling) return; // Prevent rapid scrolling
+    if (isScrolling) return;
     
     setIsScrolling(true);
     
-    const threshold = 30; // Much lower threshold for better responsiveness
+    const threshold = 30;
     
-    // Prioritize horizontal scrolling (more natural for trackpad)
     if (e.deltaX > threshold && active < count - 1) {
-      setActive(i => i + 1); // Scroll right = next card
+      setActive(i => i + 1);
     } else if (e.deltaX < -threshold && active > 0) {
-      setActive(i => i - 1); // Scroll left = previous card
+      setActive(i => i - 1);
     }
     
-    // Shorter cooldown for more responsive feel
-    setTimeout(() => setIsScrolling(false), 150);
-  };
+    setTimeout(() => setIsScrolling(false), 200);
+  }, [isScrolling, active, count]);
   
   return (
     <div className="relative w-72 h-72 md:w-96 md:h-96 cursor-grab active:cursor-grabbing" 
@@ -153,7 +152,7 @@ const Carousel = ({ children }) => {
 
 const DesignsCarousel = () => (
   <div className="md:w-full h-full flex items-center justify-center overflow-hidden font-sans">
-    <AnimateOnScroll animation='fade-in' delay={500}>
+    <AnimateOnScroll animation='fade-in' delay={300} threshold={0.3}>
       <Carousel>
         {CANVA.map((image, i) => (
           <Card key={i} Image={image} />

@@ -23,27 +23,19 @@ function DesignsSection() {
         <section id="designs" className='w-full md:h-screen py-12'>
             <div className='design-section-container'>
                 <div className='subsection-heading'>
-                    <AnimateOnScroll animation='fade-down' delay={400} >
+                    <AnimateOnScroll animation='fade-down' delay={200} threshold={0.3}>
                         <h1 className="text-secondary-100 text-vw-lg font-['Lato']">Designs</h1>
                     </AnimateOnScroll>
-                    <AnimateOnScroll animation='fade-up' delay={400} >
-                        <img src={subsectionIcon} className='h-[35px] md:h-[50px]'/>
+                    <AnimateOnScroll animation='fade-up' delay={200} threshold={0.3}>
+                        <img src={subsectionIcon} className='h-[35px] md:h-[50px]' loading="lazy"/>
                     </AnimateOnScroll>
                 </div>
-                <AnimateOnScroll animation='fade-in' delay={400}>
+                <AnimateOnScroll animation='fade-in' delay={500} threshold={0.3}>
                     <div className='design-logos-container'>
-                        <AnimateOnScroll animation='fade-in' delay={400}>
-                            <img src={canvaIcon} alt="canva" className='h-[30px] md:h-[40px] w-[40px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("CANVA")}/>
-                        </AnimateOnScroll>
-                        <AnimateOnScroll animation='fade-in' delay={600}>
-                            <img src={figmaIcon} alt="figma" className='h-[30px] md:h-[40px] w-[40px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("FIGMA")}/>
-                        </AnimateOnScroll>                   
-                        <AnimateOnScroll animation='fade-in' delay={800}>
-                            <img src={flutterIcon} alt="flutter" className='h-[30px] md:h-[40px] w-[50px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("FLUTTER")}/>
-                        </AnimateOnScroll>
-                        <AnimateOnScroll animation='fade-in' delay={1000}>
-                           <img src={reactIcon} alt="react" className='h-[30px] md:h-[40px] w-[60px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("REACT")}/>
-                        </AnimateOnScroll>
+                        <img src={canvaIcon} alt="canva" className='h-[30px] md:h-[40px] w-[40px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("CANVA")} loading="lazy"/>
+                        <img src={figmaIcon} alt="figma" className='h-[30px] md:h-[40px] w-[40px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("FIGMA")} loading="lazy"/>
+                        <img src={flutterIcon} alt="flutter" className='h-[30px] md:h-[40px] w-[50px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("FLUTTER")} loading="lazy"/>
+                        <img src={reactIcon} alt="react" className='h-[30px] md:h-[40px] w-[60px] hover:animate-logo-scale cursor-pointer' onClick={() => handleDesignChange("REACT")} loading="lazy"/>
                     </div>
                 </AnimateOnScroll>
                 <div className='designs-container'>
