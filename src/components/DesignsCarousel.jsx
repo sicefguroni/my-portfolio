@@ -7,8 +7,12 @@ import Image3 from '../assets/designs/image-3.png';
 import Image4 from '../assets/designs/image-4.png';
 import Image5 from '../assets/designs/image-5.png';
 import Image6 from '../assets/designs/image-6.png';
+import Image7 from '../assets/designs/image-7.png';
+import Image8 from '../assets/designs/image-8.png';
+import Image9 from '../assets/designs/image-9.png';
+import Image10 from '../assets/designs/image-10.png';
 
-const CANVA = [Image1, Image2, Image3, Image4, Image5, Image6];
+const CANVA = [Image1, Image2, Image3, Image4, Image5, Image6, Image7, Image8, Image9, Image10];
 const FIGMA = [];
 const FLUTTER = [];
 const REACT = [];
